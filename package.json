@@ -4,7 +4,7 @@
   "description": "Rachel birthday",
   "main": "index.js",
   "engines": {
-    "node": ">=16.13"
+    "node": ">=14"
   },
   "scripts": {
     "build": "next build",
