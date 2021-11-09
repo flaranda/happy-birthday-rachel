@@ -12,8 +12,8 @@ export const GlobalStyles: GlobalStyleComponent<
 > = createGlobalStyle`
   html,
   body {
-    width: 100vw;
-    height: 100vh;
-    background-color: #3a3a58;
+    width: 100%;
+    height: 100%;
+    background-color: ${Color.Background};
   }
 `;

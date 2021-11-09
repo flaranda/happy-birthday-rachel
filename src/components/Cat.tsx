@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 import { Color } from '../constants/Color';
 
@@ -17,6 +17,7 @@ export const Cat: React.FC = () => {
   return (
     <>
       <CatBody>
+        <CatHat />
         <CatEye isLeft isBlinking={isBlinking} />
         <CatEye isRight isBlinking={isBlinking} />
         <CatMouth />
@@ -25,7 +26,7 @@ export const Cat: React.FC = () => {
   );
 };
 
-const CatBody: React.FC = styled.div`
+const CatBody = styled.div`
   background: ${Color.Cat};
   height: 100%;
   width: 100%;
@@ -54,13 +55,37 @@ const CatBody: React.FC = styled.div`
   }
 `;
 
+const CatHat = styled.div`
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 3vw solid transparent;
+  border-right: 3vw solid transparent;
+  border-bottom: 8vw solid #f5a8b9;
+  left: 70%;
+  top: -45%;
+  transform: rotate(20deg);
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 2vw;
+    height: 2vw;
+    background: #fcec82;
+    border-radius: 50%;
+    left: -1vw;
+    top: -1vw;
+  }
+`;
+
 interface CatEyeProps {
   isBlinking: boolean;
   isLeft?: boolean;
   isRight?: boolean;
 }
 
-const CatEye: React.FC<CatEyeProps> = styled.div<CatEyeProps>`
+const CatEye = styled.div<CatEyeProps>`
   position: absolute;
   height: 12%;
   width: 12%;
@@ -73,7 +98,7 @@ const CatEye: React.FC<CatEyeProps> = styled.div<CatEyeProps>`
     props.isBlinking ? 'hidden' : 'visible'};
 `;
 
-const CatMouth: React.FC = styled.div`
+const CatMouth = styled.div`
   position: absolute;
   height: 6%;
   width: 60%;
