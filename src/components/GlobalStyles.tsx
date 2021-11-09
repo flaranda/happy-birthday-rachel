@@ -16,4 +16,8 @@ export const GlobalStyles: GlobalStyleComponent<
     height: 100%;
     background-color: ${Color.Background};
   }
+
+  * {
+    box-sizing: border-box;
+  }
 `;

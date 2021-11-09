@@ -61,8 +61,8 @@ const CatHat = styled.div`
   height: 0;
   border-left: 3vw solid transparent;
   border-right: 3vw solid transparent;
-  border-bottom: 8vw solid #f5a8b9;
-  left: 70%;
+  border-bottom: 8vw solid ${Color.CatHat};
+  left: 70.5%;
   top: -45%;
   transform: rotate(20deg);
   z-index: 1;
@@ -72,7 +72,7 @@ const CatHat = styled.div`
     position: absolute;
     width: 2vw;
     height: 2vw;
-    background: #fcec82;
+    background: ${Color.MoonPrimary};
     border-radius: 50%;
     left: -1vw;
     top: -1vw;

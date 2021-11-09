@@ -4,5 +4,6 @@ export enum Color {
   MoonPrimary = '#ffffe5',
   MoonSecondary = '#ccc5af',
   Cat = '#212121',
+  CatHat = '#f5a8b9',
   White = '#fff',
 }
