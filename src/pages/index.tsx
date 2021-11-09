@@ -7,6 +7,7 @@ import { Dialog } from '../components/Dialog';
 import { Moon } from '../components/Moon';
 import { DialogTexts } from '../constants/DialogTexts';
 import { Button } from '../components/Button';
+import { useState } from 'react';
 
 const Index: React.FC = () => {
   const moonContainerVariants: Variants = {
@@ -35,6 +36,8 @@ const Index: React.FC = () => {
     },
   };
 
+  const [text, setText] = useState(DialogTexts.WELCOME_01);
+
   return (
     <Container>
       <MoonContainer
@@ -48,11 +51,21 @@ const Index: React.FC = () => {
         <Moon />
       </MoonContainer>
       <DialogContainer>
-        <Dialog text={DialogTexts.WELCOME_01} />
+        <Dialog text={text} />
       </DialogContainer>
       <ButtonsContainer>
-        <Button text="#1" onClick={() => {}} />
-        <Button text="#2" onClick={() => {}} />
+        <Button
+          text="#1"
+          onClick={() => {
+            setText(DialogTexts.WELCOME_02);
+          }}
+        />
+        <Button
+          text="#2"
+          onClick={() => {
+            setText(DialogTexts.WELCOME_01);
+          }}
+        />
         <Button text="#3" onClick={() => {}} />
       </ButtonsContainer>
     </Container>

@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { Color } from '../constants/Color';
 
 interface DialogProps {
@@ -6,9 +8,38 @@ interface DialogProps {
 }
 
 export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState('');
+
+  useEffect(() => {
+    setTimeout(() => {
+      setText(props.text);
+      setIndex(0);
+    }, 100);
+  }, [props.text]);
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout | undefined;
+
+    if (index < text.length) {
+      timeout = setTimeout(
+        () => {
+          setIndex(index + 1);
+        },
+        index === 0 ? 200 : 60,
+      );
+    }
+
+    return () => {
+      if (timeout) {
+        clearTimeout(timeout);
+      }
+    };
+  }, [index, text]);
+
   return (
     <DialogBody>
-      <DialogText>{props.text}</DialogText>
+      <DialogText>{text.substring(0, index)}</DialogText>
     </DialogBody>
   );
 };
@@ -29,5 +60,6 @@ const DialogText = styled.p`
   white-space: pre-line;
   border-radius: 20px;
   padding: 20px;
+  min-height: 104px;
   border: 4px solid ${Color.SkyBackground};
 `;
