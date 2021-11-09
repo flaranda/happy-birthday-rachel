@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Color } from '../constants/Color';
+import { Color } from '../models/Color';
 
 export const Cat: React.FC = () => {
   const [isBlinking, setIsBlinking] = useState<boolean>(false);

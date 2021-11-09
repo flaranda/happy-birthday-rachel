@@ -4,7 +4,7 @@ import {
   GlobalStyleComponent,
 } from 'styled-components';
 
-import { Color } from '../constants/Color';
+import { Color } from '../models/Color';
 
 export const GlobalStyles: GlobalStyleComponent<
   {},

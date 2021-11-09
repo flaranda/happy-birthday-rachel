@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Color } from '../constants/Color';
+import { Color } from '../models/Color';
 
 interface DialogProps {
   text: string;
+  onDialogEnd: () => void;
 }
 
 export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
@@ -21,13 +22,19 @@ export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined;
 
-    if (index < text.length) {
-      timeout = setTimeout(
-        () => {
-          setIndex(index + 1);
-        },
-        index === 0 ? 200 : 60,
-      );
+    if (text.length > 0) {
+      if (index < text.length) {
+        timeout = setTimeout(
+          () => {
+            setIndex(index + 1);
+          },
+          index === 0 ? 200 : 60,
+        );
+      }
+
+      if (index === text.length) {
+        props.onDialogEnd();
+      }
     }
 
     return () => {

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Color } from '../constants/Color';
+import { Color } from '../models/Color';
 
 interface ButtonProps {
   text: string;
