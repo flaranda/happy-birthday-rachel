@@ -18,8 +18,8 @@ export const Cat: React.FC = () => {
     <>
       <CatBody>
         <CatHat />
-        <CatEye isLeft isBlinking={isBlinking} />
-        <CatEye isRight isBlinking={isBlinking} />
+        <CatEye position="left" isBlinking={isBlinking} />
+        <CatEye position="right" isBlinking={isBlinking} />
         <CatMouth />
       </CatBody>
     </>
@@ -81,19 +81,18 @@ const CatHat = styled.div`
 
 interface CatEyeProps {
   isBlinking: boolean;
-  isLeft?: boolean;
-  isRight?: boolean;
+  position: 'left' | 'right';
 }
 
-const CatEye = styled.div<CatEyeProps>`
+const CatEye = styled.div`
   position: absolute;
   height: 12%;
   width: 12%;
   background: ${Color.White};
   border-radius: 100%;
   top: 25%;
-  left: ${(props: CatEyeProps) => props.isLeft && '21%'};
-  right: ${(props: CatEyeProps) => props.isRight && '21%'};
+  left: ${(props: CatEyeProps) => props.position === 'left' && '21%'};
+  right: ${(props: CatEyeProps) => props.position === 'right' && '21%'};
   visibility: ${(props: CatEyeProps) =>
     props.isBlinking ? 'hidden' : 'visible'};
 `;

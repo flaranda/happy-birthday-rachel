@@ -7,11 +7,9 @@ interface DialogProps {
 
 export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
   return (
-    <>
-      <DialogBody>
-        <DialogText>{props.text}</DialogText>
-      </DialogBody>
-    </>
+    <DialogBody>
+      <DialogText>{props.text}</DialogText>
+    </DialogBody>
   );
 };
 
@@ -19,9 +17,8 @@ const DialogBody = styled.div`
   width: 100%;
   height: 100%;
   border-radius: 20px;
-  background-color: #59597c;
+  background-color: ${Color.DialogBackground};
   padding: 4px;
-  max-height: 104px;
 `;
 
 const DialogText = styled.p`
@@ -32,5 +29,5 @@ const DialogText = styled.p`
   white-space: pre-line;
   border-radius: 20px;
   padding: 20px;
-  border: 4px solid ${Color.Background};
+  border: 4px solid ${Color.SkyBackground};
 `;

@@ -1,15 +1,48 @@
 import styled from 'styled-components';
+import { motion, Variants } from 'framer-motion';
+
 import { Cat } from '../components/Cat';
 import { Cloud } from '../components/Cloud';
 import { Dialog } from '../components/Dialog';
 import { Moon } from '../components/Moon';
 import { DialogTexts } from '../constants/DialogTexts';
+import { Button } from '../components/Button';
 
 const Index: React.FC = () => {
+  const moonContainerVariants: Variants = {
+    show: {
+      top: '16%',
+      transition: {
+        duration: 1,
+        delayChildren: 3,
+        delay: 1,
+      },
+    },
+    hide: {
+      top: '120%',
+    },
+  };
+
+  const catContainerVariants: Variants = {
+    show: {
+      top: '-25%',
+      transition: {
+        duration: 1,
+      },
+    },
+    hide: {
+      top: '20%',
+    },
+  };
+
   return (
     <Container>
-      <MoonContainer>
-        <CatContainer>
+      <MoonContainer
+        variants={moonContainerVariants}
+        animate="show"
+        initial="hide"
+      >
+        <CatContainer variants={catContainerVariants}>
           <Cat />
         </CatContainer>
         <Moon />
@@ -17,7 +50,11 @@ const Index: React.FC = () => {
       <DialogContainer>
         <Dialog text={DialogTexts.WELCOME_01} />
       </DialogContainer>
-      <ButtonsContainer></ButtonsContainer>
+      <ButtonsContainer>
+        <Button text="#1" onClick={() => {}} />
+        <Button text="#2" onClick={() => {}} />
+        <Button text="#3" onClick={() => {}} />
+      </ButtonsContainer>
     </Container>
   );
 };
@@ -29,7 +66,7 @@ const Container = styled.div`
   position: absolute;
 `;
 
-const CatContainer = styled.div`
+const CatContainer = styled(motion.div)`
   position: absolute;
   top: -25%;
   right: 35%;
@@ -37,7 +74,7 @@ const CatContainer = styled.div`
   height: 15vw;
 `;
 
-const MoonContainer = styled.div`
+const MoonContainer = styled(motion.div)`
   position: absolute;
   top: 16%;
   right: 8%;
@@ -56,11 +93,14 @@ const DialogContainer = styled.div`
 const ButtonsContainer = styled.div`
   position: absolute;
   width: 90vw;
-  height: 10vw;
   left: 5vw;
   right: 5vw;
   bottom: 10%;
-  background-color: red;
+  display: flex;
+
+  & > :not(:first-child) {
+    margin-left: 16px;
+  }
 `;
 
 export default Index;

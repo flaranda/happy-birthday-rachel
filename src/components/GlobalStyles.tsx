@@ -14,7 +14,7 @@ export const GlobalStyles: GlobalStyleComponent<
   body {
     width: 100%;
     height: 100%;
-    background-color: ${Color.Background};
+    background-color: ${Color.SkyBackground};
   }
 
   * {
