@@ -19,5 +19,6 @@ export const GlobalStyles: GlobalStyleComponent<
 
   * {
     box-sizing: border-box;
+    user-select: none;
   }
 `;
