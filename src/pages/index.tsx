@@ -65,6 +65,46 @@ const Index: React.FC = () => {
     }
   };
 
+  const loadNextPresentOneDialog = () => {
+    if (dialogText === DialogText.PRESENT_1_01) {
+      setDialogText(DialogText.PRESENT_1_02);
+    } else if (dialogText === DialogText.PRESENT_1_02) {
+      setDialogText(DialogText.PRESENT_1_03);
+    } else {
+      setDialogText(DialogText.PRESENT_1_01);
+    }
+  };
+
+  const loadNextPresentTwoDialog = () => {
+    if (dialogText === DialogText.PRESENT_2_01) {
+      setDialogText(DialogText.PRESENT_2_02);
+    } else if (dialogText === DialogText.PRESENT_2_02) {
+      setDialogText(DialogText.PRESENT_2_03);
+    } else {
+      setDialogText(DialogText.PRESENT_2_01);
+    }
+  };
+
+  const loadNextPresentThreeDialog = () => {
+    if (dialogText === DialogText.PRESENT_3_01) {
+      setDialogText(DialogText.PRESENT_3_02);
+    } else if (dialogText === DialogText.PRESENT_3_02) {
+      setDialogText(DialogText.PRESENT_3_03);
+    } else {
+      setDialogText(DialogText.PRESENT_3_01);
+    }
+  };
+
+  const onDialogEnd = () => {
+    if (isWelcomeDialogText(dialogText)) {
+      setShowNextButton(true);
+      setShowPresentButtons(false);
+    } else {
+      setShowNextButton(false);
+      setShowPresentButtons(true);
+    }
+  };
+
   useEffect(() => {
     initialSequence();
   }, []);
@@ -85,33 +125,15 @@ const Index: React.FC = () => {
         <DialogContainer>
           <Dialog
             text={dialogTextToStringMap[dialogText]}
-            onDialogEnd={() => {
-              if (isWelcomeDialogText(dialogText)) {
-                setShowNextButton(true);
-                setShowPresentButtons(false);
-              } else {
-                setShowNextButton(false);
-                setShowPresentButtons(true);
-              }
-            }}
+            onDialogEnd={onDialogEnd}
           />
         </DialogContainer>
       )}
       {showPresentButtons && (
         <ButtonsContainer>
-          <Button
-            text="#1"
-            onClick={() => {
-              setDialogText(DialogText.WELCOME_02);
-            }}
-          />
-          <Button
-            text="#2"
-            onClick={() => {
-              setDialogText(DialogText.WELCOME_01);
-            }}
-          />
-          <Button text="#3" onClick={() => {}} />
+          <Button text="#1" onClick={loadNextPresentOneDialog} />
+          <Button text="#2" onClick={loadNextPresentTwoDialog} />
+          <Button text="#3" onClick={loadNextPresentThreeDialog} />
         </ButtonsContainer>
       )}
       {showNextButton && (
