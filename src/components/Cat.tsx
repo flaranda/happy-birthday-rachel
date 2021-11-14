@@ -1,9 +1,21 @@
+import { motion, Variants } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Color } from '../models/Color';
 
 export const Cat: React.FC = () => {
+  const catBodyAnimationVariants: Variants = {
+    iddle: {
+      y: '5px',
+      transition: {
+        repeat: Infinity,
+        repeatType: 'mirror',
+        duration: 1,
+      },
+    },
+  };
+
   const [isBlinking, setIsBlinking] = useState<boolean>(false);
 
   useEffect(() => {
@@ -16,7 +28,7 @@ export const Cat: React.FC = () => {
 
   return (
     <>
-      <CatBody>
+      <CatBody variants={catBodyAnimationVariants} animate="iddle">
         <CatHat />
         <CatEye position="left" isBlinking={isBlinking} />
         <CatEye position="right" isBlinking={isBlinking} />
@@ -26,10 +38,10 @@ export const Cat: React.FC = () => {
   );
 };
 
-const CatBody = styled.div`
+const CatBody = styled(motion.div)`
   background: ${Color.Cat};
-  height: 100%;
-  width: 100%;
+  height: 55px;
+  width: 55px;
   z-index: 0;
   position: relative;
 
@@ -37,21 +49,15 @@ const CatBody = styled.div`
   &:after {
     width: 0;
     height: 0;
-    top: -20%;
+    top: -14px;
     position: absolute;
     content: '';
   }
 
   &:before {
-    border-right: 5vw solid transparent;
-    border-bottom: 5vw solid ${Color.Cat};
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid ${Color.Cat};
     left: 0;
-  }
-
-  &:after {
-    border-left: 5vw solid transparent;
-    border-bottom: 5vw solid ${Color.Cat};
-    right: 0;
   }
 `;
 
@@ -59,23 +65,23 @@ const CatHat = styled.div`
   position: absolute;
   width: 0;
   height: 0;
-  border-left: 3vw solid transparent;
-  border-right: 3vw solid transparent;
-  border-bottom: 8vw solid ${Color.CatHat};
-  left: 70.5%;
-  top: -45%;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 32px solid ${Color.CatHat};
+  left: 37px;
+  top: -27px;
   transform: rotate(20deg);
   z-index: 1;
 
   &:before {
     content: '';
     position: absolute;
-    width: 2vw;
-    height: 2vw;
+    width: 10px;
+    height: 10px;
     background: ${Color.MoonPrimary};
     border-radius: 50%;
-    left: -1vw;
-    top: -1vw;
+    left: -5px;
+    top: -6px;
   }
 `;
 

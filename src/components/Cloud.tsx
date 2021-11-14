@@ -1,12 +1,12 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
 import { Color } from '../models/Color';
 
-export const Cloud: React.FC = styled.div`
+export const Cloud = styled(motion.div)`
   background: ${Color.Cloud};
   width: 90px;
   height: 42px;
-  left: 22px;
   position: relative;
   opacity: 0.9;
 

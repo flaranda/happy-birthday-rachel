@@ -10,6 +10,7 @@ import { Button } from '../components/Button';
 import { useEffect, useState } from 'react';
 import { isWelcomeDialogText } from '../utils/isWelcomeDialogText';
 import { dialogTextToStringMap } from '../models/dialogTextToStringMap';
+import { useLocalStorage } from 'react-use';
 
 const Index: React.FC = () => {
   const moonContainerVariants: Variants = {
@@ -38,6 +39,77 @@ const Index: React.FC = () => {
     },
   };
 
+  const cloudOneVariants: Variants = {
+    show: {
+      right: '12%',
+      transition: {
+        duration: 1,
+        delay: 1.2,
+      },
+    },
+    hide: {
+      right: '-50%',
+    },
+    iddle: {
+      right: '10%',
+      transition: {
+        repeat: Infinity,
+        repeatType: 'mirror',
+        duration: 2,
+        repeatDelay: 1,
+      },
+    },
+  };
+
+  const cloudTwoVariants: Variants = {
+    show: {
+      left: '20%',
+      transition: {
+        duration: 1,
+        delay: 1.2,
+      },
+    },
+    hide: {
+      left: '-35%',
+    },
+    iddle: {
+      left: '22%',
+      transition: {
+        repeat: Infinity,
+        repeatType: 'mirror',
+        duration: 2,
+        repeatDelay: 1,
+      },
+    },
+  };
+
+  const cloudThreeVariants: Variants = {
+    show: {
+      left: '10%',
+      transition: {
+        duration: 1,
+        delay: 1.2,
+      },
+    },
+    hide: {
+      left: '-35%',
+    },
+    iddle: {
+      left: '12%',
+      transition: {
+        repeat: Infinity,
+        repeatType: 'mirror',
+        duration: 2,
+        repeatDelay: 1,
+      },
+    },
+  };
+
+  const [checkpoint, setCheckpoint] = useLocalStorage<boolean>(
+    'checkpoint',
+    false,
+  );
+
   const [dialogText, setDialogText] = useState(DialogText.WELCOME_01);
 
   const [showDialog, setShowDialog] = useState(false);
@@ -45,9 +117,16 @@ const Index: React.FC = () => {
   const [showNextButton, setShowNextButton] = useState(false);
 
   const moonContainerAnimationControls = useAnimation();
+  const cloudAnimationControls = useAnimation();
 
   const initialSequence = async () => {
-    await moonContainerAnimationControls.start('show');
+    await Promise.all([
+      moonContainerAnimationControls.start('show'),
+      cloudAnimationControls.start('show'),
+    ]);
+
+    cloudAnimationControls.start('iddle');
+
     setShowDialog(true);
   };
 
@@ -61,6 +140,7 @@ const Index: React.FC = () => {
     } else if (dialogText === DialogText.WELCOME_04) {
       setDialogText(DialogText.WELCOME_05);
     } else {
+      setCheckpoint(true);
       setDialogText(DialogText.INITIAL);
     }
   };
@@ -109,8 +189,31 @@ const Index: React.FC = () => {
     initialSequence();
   }, []);
 
+  useEffect(() => {
+    if (checkpoint) {
+      setDialogText(DialogText.INITIAL);
+    }
+  }, [checkpoint]);
+
   return (
-    <Container>
+    <>
+      <CloudsContainer>
+        <Cloud
+          variants={cloudOneVariants}
+          animate={cloudAnimationControls}
+          initial="hide"
+        />
+        <Cloud
+          variants={cloudTwoVariants}
+          animate={cloudAnimationControls}
+          initial="hide"
+        />
+        <Cloud
+          variants={cloudThreeVariants}
+          animate={cloudAnimationControls}
+          initial="hide"
+        />
+      </CloudsContainer>
       <MoonContainer
         variants={moonContainerVariants}
         animate={moonContainerAnimationControls}
@@ -147,46 +250,61 @@ const Index: React.FC = () => {
           />
         </ButtonsContainer>
       )}
-    </Container>
+    </>
   );
 };
 
-const Container = styled.div`
+const CloudsContainer = styled.div`
   width: 100%;
-  height: 100%;
-  display: flex;
+  height: 90%;
   position: absolute;
+
+  & > ${Cloud} {
+    position: absolute;
+    z-index: 10;
+  }
+
+  & > ${Cloud}:nth-child(1) {
+    top: 45%;
+    right: 12%;
+  }
+
+  & > ${Cloud}:nth-child(2) {
+    top: 10%;
+    left: 20%;
+  }
+
+  & > ${Cloud}:nth-child(3) {
+    top: 30%;
+    left: 10%;
+  }
 `;
 
 const CatContainer = styled(motion.div)`
   position: absolute;
   top: -25%;
   right: 35%;
-  width: 15vw;
-  height: 15vw;
 `;
 
 const MoonContainer = styled(motion.div)`
   position: absolute;
   top: 16%;
   right: 8%;
-  width: 50vw;
-  height: 50vw;
 `;
 
-const DialogContainer = styled.div`
+const DialogContainer = styled(motion.div)`
   position: absolute;
-  width: 90vw;
-  left: 5vw;
-  right: 5vw;
-  top: 50%;
+  width: 90%;
+  left: 5%;
+  right: 5%;
+  top: 55%;
 `;
 
 const ButtonsContainer = styled.div`
   position: absolute;
-  width: 90vw;
-  left: 5vw;
-  right: 5vw;
+  width: 90%;
+  left: 5%;
+  right: 5%;
   bottom: 10%;
   display: flex;
 

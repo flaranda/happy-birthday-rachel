@@ -20,8 +20,8 @@ const MoonCrater = styled.div`
 `;
 
 const MoonBody = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 185px;
+  height: 185px;
   background: ${Color.MoonPrimary};
   border-radius: 50%;
   box-shadow: 0 0 30px 1px ${Color.MoonSecondary};

@@ -44,8 +44,15 @@ export const Dialog: React.FC<DialogProps> = (props: DialogProps) => {
     };
   }, [index, text]);
 
+  const forceEndDialog = () => {
+    setText(props.text);
+    setIndex(props.text.length);
+
+    props.onDialogEnd();
+  };
+
   return (
-    <DialogBody>
+    <DialogBody onClick={forceEndDialog}>
       <DialogText>{text.substring(0, index)}</DialogText>
     </DialogBody>
   );
