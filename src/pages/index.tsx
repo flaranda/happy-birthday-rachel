@@ -239,7 +239,7 @@ const Index: React.FC = () => {
         initial="hide"
       >
         <CatContainer variants={catContainerVariants}>
-          <Cat type="simba" />
+          <Cat />
         </CatContainer>
         <Moon />
       </MoonContainer>

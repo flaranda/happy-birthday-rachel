@@ -4,8 +4,13 @@ import styled from 'styled-components';
 
 import { Color } from '../models/Color';
 
+interface CatEyeProps {
+  isBlinking: boolean;
+  position: 'left' | 'right';
+}
+
 export const Cat: React.FC = () => {
-  const catBodyAnimationVariants: Variants = {
+  const catBodyVariants: Variants = {
     iddle: {
       y: '5px',
       transition: {
@@ -28,7 +33,7 @@ export const Cat: React.FC = () => {
 
   return (
     <>
-      <CatBody variants={catBodyAnimationVariants} animate="iddle">
+      <CatBody variants={catBodyVariants} animate="iddle">
         <CatHat />
         <CatEye position="left" isBlinking={isBlinking} />
         <CatEye position="right" isBlinking={isBlinking} />
@@ -84,11 +89,6 @@ const CatHat = styled.div`
     top: -6px;
   }
 `;
-
-interface CatEyeProps {
-  isBlinking: boolean;
-  position: 'left' | 'right';
-}
 
 const CatEye = styled.div`
   position: absolute;
