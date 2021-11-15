@@ -105,6 +105,18 @@ const Index: React.FC = () => {
     },
   };
 
+  const dialogContainerVariants: Variants = {
+    show: {
+      scale: 1,
+      transition: {
+        duration: 0.3,
+      },
+    },
+    hide: {
+      scale: 0,
+    },
+  };
+
   const [checkpoint, setCheckpoint] = useLocalStorage<boolean>(
     'checkpoint',
     false,
@@ -117,6 +129,7 @@ const Index: React.FC = () => {
   const [showNextButton, setShowNextButton] = useState(false);
 
   const moonContainerAnimationControls = useAnimation();
+  const dialogContainerAnimationControls = useAnimation();
   const cloudAnimationControls = useAnimation();
 
   const initialSequence = async () => {
@@ -195,6 +208,12 @@ const Index: React.FC = () => {
     }
   }, [checkpoint]);
 
+  useEffect(() => {
+    if (showDialog) {
+      dialogContainerAnimationControls.start('show');
+    }
+  }, [showDialog]);
+
   return (
     <>
       <CloudsContainer>
@@ -220,12 +239,16 @@ const Index: React.FC = () => {
         initial="hide"
       >
         <CatContainer variants={catContainerVariants}>
-          <Cat />
+          <Cat type="simba" />
         </CatContainer>
         <Moon />
       </MoonContainer>
       {showDialog && (
-        <DialogContainer>
+        <DialogContainer
+          variants={dialogContainerVariants}
+          animate={dialogContainerAnimationControls}
+          initial="hide"
+        >
           <Dialog
             text={dialogTextToStringMap[dialogText]}
             onDialogEnd={onDialogEnd}
