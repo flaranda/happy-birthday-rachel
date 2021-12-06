@@ -3,6 +3,8 @@ import { DialogText } from './DialogText';
 export const dialogTextToStringMap: { [TKey in DialogText]: string } = {
   [DialogText.INITIAL]:
     'Push several times on each button to get clues for each present.',
+  [DialogText.INITIAL_SECRET]:
+    'Push several times on the button to get clues for the last present.',
   [DialogText.PRESENT_1_01]:
     "I can't reach the place where the present is hidden.",
   [DialogText.PRESENT_1_02]:
@@ -14,11 +16,18 @@ export const dialogTextToStringMap: { [TKey in DialogText]: string } = {
   [DialogText.PRESENT_3_01]: "So you didn't sell it on Wallapop yet...",
   [DialogText.PRESENT_3_02]: 'How long have you not used it, mon amour?',
   [DialogText.PRESENT_3_03]: 'Comment pourrais-je traduire cette phrase?',
-  [DialogText.PRESENT_4_01]: 'This present is not at home nor the building.',
+  [DialogText.PRESENT_4_01]:
+    "This present is not at home nor the building. It's out there in the city!",
   [DialogText.PRESENT_4_02]:
-    'Where did you go with Fran on Christmas Eve evening last year?',
+    'Have you had a busy day? Do you feel like a gin-tonic, maybe?',
   [DialogText.PRESENT_4_03]:
-    'Remember the place where Fran and you had your first drink together?',
+    'Where did you have your first drink with Fran last Christmas Eve?',
+  [DialogText.SECRET_01]:
+    'Hooray! You found all the presents! Did you have fun?',
+  [DialogText.SECRET_02]:
+    "Listen... I'm afraid you haven't got all the presents yet.",
+  [DialogText.SECRET_03]:
+    "There's still one more present! But it is easier to find, trust me!",
   [DialogText.WELCOME_01]: 'Hi Rachel!\nHappy birthday to you!',
   [DialogText.WELCOME_02]:
     "Before you ask... Yes! I'm a virtual version of Salem.",

@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Head from 'next/head';
+import ReactConfetti from 'react-confetti';
 import { motion, useAnimation, Variants } from 'framer-motion';
+import { useLocalStorage } from 'react-use';
 
 import { Cat } from '../components/Cat';
 import { Cloud } from '../components/Cloud';
@@ -7,10 +11,8 @@ import { Dialog } from '../components/Dialog';
 import { Moon } from '../components/Moon';
 import { DialogText } from '../models/DialogText';
 import { Button } from '../components/Button';
-import { useEffect, useState } from 'react';
 import { isWelcomeDialogText } from '../utils/isWelcomeDialogText';
 import { dialogTextToStringMap } from '../models/dialogTextToStringMap';
-import { useLocalStorage } from 'react-use';
 
 const Index: React.FC = () => {
   const moonContainerVariants: Variants = {
@@ -127,23 +129,14 @@ const Index: React.FC = () => {
   const [showDialog, setShowDialog] = useState(false);
   const [showPresentButtons, setShowPresentButtons] = useState(false);
   const [showNextButton, setShowNextButton] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [recycleConfetti, setRecycleConfetti] = useState(true);
 
   const moonContainerAnimationControls = useAnimation();
   const dialogContainerAnimationControls = useAnimation();
   const cloudAnimationControls = useAnimation();
 
-  const initialSequence = async () => {
-    await Promise.all([
-      moonContainerAnimationControls.start('show'),
-      cloudAnimationControls.start('show'),
-    ]);
-
-    cloudAnimationControls.start('iddle');
-
-    setShowDialog(true);
-  };
-
-  const loadNextInitialDialog = () => {
+  const loadNextWelcomeDialog = () => {
     if (dialogText === DialogText.WELCOME_01) {
       setDialogText(DialogText.WELCOME_02);
     } else if (dialogText === DialogText.WELCOME_02) {
@@ -189,6 +182,7 @@ const Index: React.FC = () => {
   };
 
   const onDialogEnd = () => {
+    console.log('test');
     if (isWelcomeDialogText(dialogText)) {
       setShowNextButton(true);
       setShowPresentButtons(false);
@@ -196,9 +190,24 @@ const Index: React.FC = () => {
       setShowNextButton(false);
       setShowPresentButtons(true);
     }
+
+    if (dialogText === DialogText.WELCOME_01) {
+      setShowConfetti(true);
+    }
   };
 
   useEffect(() => {
+    const initialSequence = async () => {
+      await Promise.all([
+        moonContainerAnimationControls.start('show'),
+        cloudAnimationControls.start('show'),
+      ]);
+
+      cloudAnimationControls.start('iddle');
+
+      setShowDialog(true);
+    };
+
     initialSequence();
   }, []);
 
@@ -216,6 +225,16 @@ const Index: React.FC = () => {
 
   return (
     <>
+      <Head>
+        <title>Happy birthday Rachel!</title>
+      </Head>
+      <Confetti
+        width={414}
+        height={736}
+        numberOfPieces={100}
+        run={showConfetti}
+        recycle={recycleConfetti}
+      />
       <CloudsContainer>
         <Cloud
           variants={cloudOneVariants}
@@ -268,7 +287,8 @@ const Index: React.FC = () => {
             text="Next"
             onClick={() => {
               setShowNextButton(false);
-              loadNextInitialDialog();
+              setRecycleConfetti(false);
+              loadNextWelcomeDialog();
             }}
           />
         </ButtonsContainer>
@@ -334,6 +354,10 @@ const ButtonsContainer = styled.div`
   & > :not(:first-child) {
     margin-left: 16px;
   }
+`;
+
+const Confetti = styled(ReactConfetti)`
+  z-index: 0 !important;
 `;
 
 export default Index;
