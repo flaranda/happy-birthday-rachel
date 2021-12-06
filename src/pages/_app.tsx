@@ -15,6 +15,10 @@ const App: React.FC<AppProps> = (appProps: AppProps) => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
         />
+        <meta
+          name="description"
+          content="Hi Rachel! Are you ready for your birthday celebration?"
+        />
       </Head>
       <Reset />
       <GlobalStyles />
