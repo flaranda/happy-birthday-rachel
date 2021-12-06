@@ -303,6 +303,7 @@ const CloudsContainer = styled.div`
   width: 100%;
   height: 90%;
   position: absolute;
+  z-index: 1;
 
   & > ${Cloud} {
     position: absolute;
@@ -329,12 +330,14 @@ const CatContainer = styled(motion.div)`
   position: absolute;
   top: -25%;
   right: 35%;
+  z-index: 0;
 `;
 
 const MoonContainer = styled(motion.div)`
   position: absolute;
   top: 16%;
   right: 8%;
+  z-index: 0;
 `;
 
 const DialogContainer = styled(motion.div)`
@@ -343,6 +346,7 @@ const DialogContainer = styled(motion.div)`
   left: 5%;
   right: 5%;
   top: 55%;
+  z-index: 3;
 `;
 
 const ButtonsContainer = styled.div`
@@ -352,6 +356,7 @@ const ButtonsContainer = styled.div`
   right: 5%;
   bottom: 10%;
   display: flex;
+  z-index: 3;
 
   & > :not(:first-child) {
     margin-left: 16px;
@@ -359,7 +364,7 @@ const ButtonsContainer = styled.div`
 `;
 
 const Confetti = styled(ReactConfetti)`
-  z-index: 0 !important;
+  z-index: 2 !important;
 `;
 
 export default Index;
