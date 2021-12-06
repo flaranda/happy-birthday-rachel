@@ -145,6 +145,8 @@ const Index: React.FC = () => {
       setDialogText(DialogText.WELCOME_04);
     } else if (dialogText === DialogText.WELCOME_04) {
       setDialogText(DialogText.WELCOME_05);
+    } else if (dialogText === DialogText.WELCOME_05) {
+      setDialogText(DialogText.WELCOME_06);
     } else {
       setCheckpoint(true);
       setDialogText(DialogText.INITIAL);

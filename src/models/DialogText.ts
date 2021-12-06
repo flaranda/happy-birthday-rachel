@@ -27,4 +27,5 @@ export enum DialogText {
   WELCOME_03 = 'WELCOME_03',
   WELCOME_04 = 'WELCOME_04',
   WELCOME_05 = 'WELCOME_05',
+  WELCOME_06 = 'WELCOME_06',
 }

@@ -36,5 +36,7 @@ export const dialogTextToStringMap: { [TKey in DialogText]: string } = {
   [DialogText.WELCOME_04]:
     'Exactly! Fran has hidden them all and created this gymkhana!',
   [DialogText.WELCOME_05]:
+    'I think there are a total of three hidden presents. Are you ready?',
+  [DialogText.WELCOME_06]:
     'I will give you clues of the location of each present. It will be fun!',
 };

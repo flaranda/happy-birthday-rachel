@@ -7,5 +7,6 @@ export function isWelcomeDialogText(dialogText: DialogText): boolean {
     DialogText.WELCOME_03,
     DialogText.WELCOME_04,
     DialogText.WELCOME_05,
+    DialogText.WELCOME_06,
   ].includes(dialogText);
 }
